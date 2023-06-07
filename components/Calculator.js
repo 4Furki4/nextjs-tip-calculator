@@ -3,7 +3,6 @@ import InputBills from './InputBills';
 import TipPercentage from './TipPercentage';
 import InputPeople from './InputPeople';
 import Result from './Result';
-import ResetButton from './ResetButton';
 import { useState } from 'react';
 
 const Calculator = () => {
@@ -17,6 +16,15 @@ const Calculator = () => {
         tipAmountPerPerson: 0,
         totalAmountPerPerson: 0
     })
+    function handleReset() {
+        setTotalBill(0)
+        setTipPercentage(0)
+        setNumberOfPeople(0)
+        setResult({
+            tipAmountPerPerson: 0,
+            totalAmountPerPerson: 0
+        })
+    }
     function calculateTip() {
         if (totalBill > 0 && tipPercentage > 0 && numberOfPeople > 0) {
             let tipAmountPerPerson = totalBill * tipPercentage / 100 / numberOfPeople
@@ -50,7 +58,7 @@ const Calculator = () => {
                 </div>
                 <div className="card-right">
                     <Result result={result} />
-                    <ResetButton />
+                    <button onClick={handleReset} className="btn btn-primary btn-reset">Reset</button>
                 </div>
             </section>
         </main>
